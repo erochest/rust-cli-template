@@ -10,7 +10,7 @@ edition = "2018"
 clap-verbosity-flag = "*"
 confy = "*"
 env_logger = "*"
-human_panic = "*"
+human-panic = "*"
 log = "*"
 structopt = "*"
 
