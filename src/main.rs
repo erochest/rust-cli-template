@@ -1,3 +1,4 @@
+
 use clap_verbosity_flag::Verbosity;
 use env_logger;
 use human_panic::setup_panic;
@@ -9,8 +10,10 @@ use error::Result;
 
 fn main() -> Result<()> {
     setup_panic!();
-    env_logger::init();
     let args = Cli::from_args();
+    env_logger::Builder::new()
+        .filter_level(args.verbose.log_level_filter())
+        .init();
 
     println!("{:?}", args);
 
