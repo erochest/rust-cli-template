@@ -1,8 +1,8 @@
 
+use clap::Parser;
 use clap_verbosity_flag::Verbosity;
 use env_logger;
 use human_panic::setup_panic;
-use structopt::StructOpt;
 
 mod error;
 
@@ -10,7 +10,7 @@ use error::Result;
 
 fn main() -> Result<()> {
     setup_panic!();
-    let args = Cli::from_args();
+    let args = Cli::parse();
     env_logger::Builder::new()
         .filter_level(args.verbose.log_level_filter())
         .init();
@@ -20,8 +20,9 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
+#[command(author, version, about, long_about = None)]
 struct Cli {
-    #[structopt(flatten)]
+    #[command(flatten)]
     verbose: Verbosity,
 }
