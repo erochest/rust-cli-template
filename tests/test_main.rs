@@ -1,12 +1,13 @@
 use std::process::Command;
 
+use assert_cmd::cargo::cargo_bin;
 use assert_cmd::prelude::*;
 
 #[test]
 fn test_run() {
-    Command::cargo_bin(env!["CARGO_PKG_NAME"])
-        .unwrap()
+    Command::new(cargo_bin!())
         .arg("--help")
+        .unwrap()
         .assert()
         .success();
 }
